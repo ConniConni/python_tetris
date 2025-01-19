@@ -15,6 +15,8 @@ def main():
 
     # スタートボタンにコントローラのメソッドを設定
     view.set_start_button_callback(controller.start_game)
+    # リセットボタンにコントローラのメソッドを設定
+    view.set_reset_button_callback(controller.reset_game)
 
     # Tkinter イベントループ開始
     root.mainloop()

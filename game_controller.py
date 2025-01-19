@@ -13,6 +13,12 @@ class GameController:
         print("start_game")
         self.game_loop()
 
+    def reset_game(self):
+        """ゲームをリセット"""
+        self.model.__init__()
+        self.view.draw_field()
+        print("reset_game")
+
     def game_loop(self):
         """ゲームループ"""
         if not self.model.move_block(0, 1):

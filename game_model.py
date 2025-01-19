@@ -20,6 +20,7 @@ class GameModel:
 
         # ゲーム状態
         self.current_block = None
+        self.current_position = (4, 0)
         self.game_over = False
 
     def spawn_block(self):
@@ -47,16 +48,17 @@ class GameModel:
         # 引数positionから座標を取得
         px, py = position
         # ブロックの座標分の移動が可能か確認
-        for dx, dy in block:
-            x, y = px + dx, py + dy
-            if (
-                x < 0
-                or x >= self.width
-                or y >= self.height
-                or (y >= 0 and self.field[y][x] != 0)
-            ):
-                return True
-        return False
+        if block:
+            for dx, dy in block:
+                x, y = px + dx, py + dy
+                if (
+                    x < 0
+                    or x >= self.width
+                    or y >= self.height
+                    or (y >= 0 and self.field[y][x] != 0)
+                ):
+                    return True
+            return False
 
     def fix_block(self):
         """ブロックを固定"""

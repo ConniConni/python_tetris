@@ -31,7 +31,6 @@ class GameView:
                         (x + 1) * CELL_SIZE, (y + 1) * CELL_SIZE,
                         fill="cyan", outline="gray"
                     )
-        print("draw_fix_field")
 
         # 現在のブロックを描画
         if self.model.current_block:
@@ -43,8 +42,11 @@ class GameView:
                     (x + 1) * CELL_SIZE, (y + 1) * CELL_SIZE,
                     fill="yellow", outline="gray"
                 )
-        print("draw_current_block")
 
     def set_start_button_callback(self, callback):
         """スタートボタンのコールバックを設定"""
         self.start_button.config(command=callback)
+
+    def set_reset_button_callback(self, callback):
+        """リセットボタンのコールバックを設定"""
+        self.reset_button.config(command=callback)
