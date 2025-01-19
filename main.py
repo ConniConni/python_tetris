@@ -1,4 +1,5 @@
 from tkinter import Tk
+from game_model import GameModel
 
 def main():
     # Tkinter ウィンドウを作成
