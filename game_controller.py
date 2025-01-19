@@ -1,3 +1,5 @@
+CELL_SIZE = 30
+
 class GameController:
     def __init__(self, model , view):
         self.model = model
@@ -27,7 +29,7 @@ class GameController:
 
         else:
             self.view.canvas.create_text(
-                (self.model.width) * 30 // 2, self.model.height * 30 // 2,
+                (self.model.width) * CELL_SIZE // 2, self.model.height * CELL_SIZE // 2,
                 text="Game OVer", fill="red", font=("Arial", 24)
             )
             print("game_over")
