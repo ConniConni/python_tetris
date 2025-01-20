@@ -1,4 +1,4 @@
-from tkinter import Canvas, Button
+from tkinter import Canvas, Button, Label
 
 CELL_SIZE = 30
 
@@ -9,6 +9,10 @@ class GameView:
         # キャンバス
         self.canvas = Canvas(root, width=model.width * CELL_SIZE, height=model.height * CELL_SIZE, bg="black")
         self.canvas.pack(side="left")
+
+        # スコアラベル
+        self.score_label = Label(root, text="Score: 0", font=("Arial", 16))
+        self.score_label.pack(side="top")
 
         # ボタン
         self.start_button = Button(root, text="Start")

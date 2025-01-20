@@ -21,6 +21,7 @@ class GameModel:
         # ゲーム状態
         self.current_block = None
         self.current_position = (4, 0)
+        self.score = 0
         self.game_over = False
 
     def spawn_block(self):
@@ -69,3 +70,24 @@ class GameModel:
             x, y = px + dx, py + dy
             if 0 <= y < self.height:
                 self.field[y][x] = 1
+        self.clear_lines()
+
+    def clear_lines(self):
+        """ラインを消去"""
+        # scoreリストを宣言
+        score = {1:100, 2:300, 3:500, 4:800}
+        # 新しいフィールドを生成。ただし、0を含まない（全て1の）行は除く
+        new_field = [row for row in self.field if any(cell == 0 for cell in row)]
+        lines_cleared = self.height - len(new_field)
+        numbers = int(lines_cleared)
+        # 消去ライン数に応じた得点を加算する
+        if numbers in score:
+            get_score = score[numbers]
+            self.score += get_score
+
+            # 新しいフィールドに消去したラインの数だけ、全て値が0の行を追加する
+            while len(new_field) < self.height:
+                new_field.insert(0, [0] * self.width)
+            self.field = new_field
+
+            print(f"add {get_score} point")
