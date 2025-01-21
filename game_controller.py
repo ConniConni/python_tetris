@@ -32,6 +32,8 @@ class GameController:
 
         # フィールドと現在のブロックを描画
         self.view.draw_field()
+        # スコア表示更新
+        self.view.update_score()
 
         # ゲーム継続判定
         if not self.model.game_over:

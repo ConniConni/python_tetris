@@ -47,6 +47,10 @@ class GameView:
                     fill="yellow", outline="gray"
                 )
 
+    def update_score(self):
+        """スコア表示を更新"""
+        self.score_label.config(text=f"Score: {self.model.score}")
+
     def set_start_button_callback(self, callback):
         """スタートボタンのコールバックを設定"""
         self.start_button.config(command=callback)
