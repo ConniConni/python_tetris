@@ -4,6 +4,10 @@ class GameController:
     def __init__(self, model , view):
         self.model = model
         self.view = view
+        # キャンバスにキーイベントをバインド
+        if not self.model.game_over:
+            self.view.canvas.bind("<Key>", self.handle_key)
+            self.view.canvas.focus_set()
 
     def start_game(self):
         """ゲームを開始"""
@@ -40,3 +44,14 @@ class GameController:
             )
             print("game_over")
         return
+
+    def handle_key(self, event):
+        """キー入力を処理"""
+        if event.keysym == "Left":
+            self.model.move_block(-1, 0)
+        elif event.keysym == "Right":
+            self.model.move_block(1, 0)
+        elif event.keysym == "Down":
+            self.model.move_block(0, 1)
+
+        self.view.draw_field()
