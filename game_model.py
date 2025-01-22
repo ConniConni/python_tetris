@@ -44,6 +44,14 @@ class GameModel:
             return True
         return False
 
+    def rotate_block(self):
+        """ブロックを回転"""
+        # ブロックを時計回りに90度回転させる
+        rotated_block =[(-y, x) for x, y in self.current_block]
+        if not self.check_collision(rotated_block, self.current_position):
+            self.current_block = rotated_block
+            print("roate_block 90 degrees clockwise")
+
     def check_collision(self, block , position):
         """ブロックの衝突判定"""
         # 引数positionから座標を取得
