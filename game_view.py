@@ -1,6 +1,7 @@
 from tkinter import Canvas, Button, Label
 
 CELL_SIZE = 30
+SUB_GRID_LENGTH = 4
 
 class GameView:
     def __init__(self, root ,model):
@@ -9,6 +10,42 @@ class GameView:
         # キャンバス
         self.canvas = Canvas(root, width=model.width * CELL_SIZE, height=model.height * CELL_SIZE, bg="black")
         self.canvas.pack(side="left")
+
+        # 次のブロック用のキャンバス
+        self.next_canvas = Canvas(
+                                    root,
+                                    width=SUB_GRID_LENGTH * CELL_SIZE,
+                                    height=(model.height - (SUB_GRID_LENGTH - 1)) / SUB_GRID_LENGTH * CELL_SIZE,
+                                    bg="gray"
+                                )
+        self.next_canvas.pack(side="top") #右側に配置
+
+        # 次の次のブロック用のキャンバス
+        self.second_canvas = Canvas(
+                                    root,
+                                    width=SUB_GRID_LENGTH * CELL_SIZE,
+                                    height=(model.height - (SUB_GRID_LENGTH - 1)) / SUB_GRID_LENGTH * CELL_SIZE,
+                                    bg="gray"
+                                    )
+        self.second_canvas.pack(side="top") # 右側に配置
+
+        # 次の次の次のブロック用のキャンバス
+        self.third_canvas = Canvas(
+                                    root,
+                                    width=SUB_GRID_LENGTH * CELL_SIZE,
+                                    height=(model.height - (SUB_GRID_LENGTH -1)) / SUB_GRID_LENGTH * CELL_SIZE,
+                                    bg="gray"
+                                    )
+        self.third_canvas.pack(side="top") # 右側に配置
+
+        # ホールドブロック用キャンバス
+        self.hold_canvas = Canvas(
+                                    root,
+                                    width=SUB_GRID_LENGTH * CELL_SIZE,
+                                    height=(model.height - (SUB_GRID_LENGTH - 1)) / SUB_GRID_LENGTH * CELL_SIZE,
+                                    bg="gray"
+                                )
+        self.hold_canvas.pack(side="top") # 右側に配置
 
         # スコアラベル
         self.score_label = Label(root, text="Score: 0", font=("Arial", 16))
