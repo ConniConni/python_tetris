@@ -1,4 +1,5 @@
 import random
+from collections import deque
 
 class GameModel:
     def __init__(self):
@@ -21,14 +22,21 @@ class GameModel:
         # ゲーム状態
         self.current_block = None
         self.current_position = (4, 0)
+        self.next_blocks = deque()
+        while len(self.next_blocks) < 3:
+            block_type = random.choice(list(self.blocks.keys()))
+            self.next_blocks.append(block_type)
+        self.holder_block = None
         self.score = 0
         self.game_over = False
 
     def spawn_block(self):
         """新しいブロックを生成"""
-        block_type = random.choice(list(self.blocks.keys()))
-        print(f"block_type:{block_type}")
-        self.current_block = self.blocks[block_type]
+        # block_type = random.choice(list(self.blocks.keys()))
+        # print(f"block_type:{block_type}")
+        # self.current_block = self.blocks[block_type]
+        self.current_block = self.blocks[self.next_blocks.popleft()]
+        self.update_next_blocks()
         self.current_position = (4, 0)
         # check_collision = Trueならば、game_overフラグを立てる
         if self.check_collision(self.current_block, self.current_position):
@@ -99,3 +107,10 @@ class GameModel:
             self.field = new_field
 
             print(f"add {get_score} point")
+
+    def update_next_blocks(self):
+        if not self.game_over:
+            while len(self.next_blocks) < 3:
+                block_type = random.choice(list(self.blocks.keys()))
+                self.next_blocks.append(block_type)
+            print(f"next_blocks:[{self.next_blocks[0]},{self.next_blocks[1]},{self.next_blocks[2]}]")

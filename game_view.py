@@ -2,6 +2,7 @@ from tkinter import Canvas, Button, Label
 
 CELL_SIZE = 30
 SUB_GRID_LENGTH = 4
+SIDE_CELL_SIZE = CELL_SIZE * 0.8
 
 class GameView:
     def __init__(self, root ,model):
@@ -61,6 +62,12 @@ class GameView:
         """フィールドと現在のブロックを描画"""
         # キャンバスの初期化
         if not self.model.game_over:
+            self.next_canvas.delete("all")      # next_canvasをクリア
+            self.next_block()
+            # self.second_canvas.delete("all")    # second_canvasをクリア
+            # self.second_block()
+            # self.third_canvas.delete("all")     # third_canvasをクリア
+            # self.third_block()
             self.canvas.delete("all")
 
         # フィールド上の固定ブロックを描画
@@ -82,6 +89,16 @@ class GameView:
                     x * CELL_SIZE, y * CELL_SIZE,
                     (x + 1) * CELL_SIZE, (y + 1) * CELL_SIZE,
                     fill="yellow", outline="gray"
+                )
+
+    def next_block(self):
+        """次のブロックを表示"""
+        if not self.model.game_over:
+            for dx, dy in self.model.blocks[self.model.next_blocks[0]]:
+                x, y = (SUB_GRID_LENGTH / 4) + dx, (SUB_GRID_LENGTH / 4) + dy
+                self.next_canvas.create_rectangle(
+                    x * SIDE_CELL_SIZE, y * SIDE_CELL_SIZE, (x + 1) * SIDE_CELL_SIZE, (y + 1) * SIDE_CELL_SIZE,
+                    fill="cyan", outline="gray"
                 )
 
     def update_score(self):
