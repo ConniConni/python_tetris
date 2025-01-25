@@ -57,5 +57,7 @@ class GameController:
             self.model.move_block(0, 1)
         elif event.keysym == "Up":
             self.model.rotate_block()
+        elif event.keysym == "Shift_R":
+            self.model.hold_block()
 
         self.view.draw_field()

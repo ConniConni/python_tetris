@@ -62,12 +62,14 @@ class GameView:
         """フィールドと現在のブロックを描画"""
         # キャンバスの初期化
         if not self.model.game_over:
-            self.next_canvas.delete("all")      # next_canvasをクリア
+            self.next_canvas.delete("all")      # next_canvasをクリアし、表示
             self.next_block()
-            self.second_canvas.delete("all")    # second_canvasをクリア
+            self.second_canvas.delete("all")    # second_canvasをクリア、表示
             self.second_block()
-            self.third_canvas.delete("all")     # third_canvasをクリア
+            self.third_canvas.delete("all")     # third_canvasをクリア、表示
             self.third_block()
+            self.hold_canvas.delete("all")     # hold_canvasをクリア、表示
+            self.hold_block()
             self.canvas.delete("all")
 
         # フィールド上の固定ブロックを描画
@@ -120,6 +122,19 @@ class GameView:
                     x * SIDE_CELL_SIZE, y * SIDE_CELL_SIZE, (x + 1) * SIDE_CELL_SIZE, (y + 1) * SIDE_CELL_SIZE,
                     fill="cyan", outline="gray"
                 )
+
+    def hold_block(self):
+        """ホールドしたブロックを描画"""
+
+        if not self.model.game_over:
+            if self.model.holder_block:
+                for dx, dy in self.model.holder_block:
+                    x, y = (SUB_GRID_LENGTH / 4) + dx, (SUB_GRID_LENGTH / 4) + dy
+                    self.hold_canvas.create_rectangle(
+                        x * SIDE_CELL_SIZE, y * SIDE_CELL_SIZE, (x + 1) * SIDE_CELL_SIZE, (y + 1) * SIDE_CELL_SIZE,
+                        fill="orange", outline="gray"
+                    )
+
 
     def update_score(self):
         """スコア表示を更新"""

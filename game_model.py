@@ -60,6 +60,17 @@ class GameModel:
             self.current_block = rotated_block
             print("rotate_block 90 degrees clockwise")
 
+    def hold_block(self):
+        """現在のブロックをホールド"""
+        if self.holder_block is None:
+            self.holder_block = self.current_block
+            self.spawn_block()
+            print("hold_block")
+        else:
+            self.current_block, self.holder_block = self.holder_block, self.current_block
+            self.current_position = (4, 0)
+            print("change_block")
+
     def check_collision(self, block , position):
         """ブロックの衝突判定"""
         # 引数positionから座標を取得
