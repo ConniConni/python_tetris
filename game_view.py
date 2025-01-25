@@ -64,10 +64,10 @@ class GameView:
         if not self.model.game_over:
             self.next_canvas.delete("all")      # next_canvasをクリア
             self.next_block()
-            # self.second_canvas.delete("all")    # second_canvasをクリア
-            # self.second_block()
-            # self.third_canvas.delete("all")     # third_canvasをクリア
-            # self.third_block()
+            self.second_canvas.delete("all")    # second_canvasをクリア
+            self.second_block()
+            self.third_canvas.delete("all")     # third_canvasをクリア
+            self.third_block()
             self.canvas.delete("all")
 
         # フィールド上の固定ブロックを描画
@@ -97,6 +97,26 @@ class GameView:
             for dx, dy in self.model.blocks[self.model.next_blocks[0]]:
                 x, y = (SUB_GRID_LENGTH / 4) + dx, (SUB_GRID_LENGTH / 4) + dy
                 self.next_canvas.create_rectangle(
+                    x * SIDE_CELL_SIZE, y * SIDE_CELL_SIZE, (x + 1) * SIDE_CELL_SIZE, (y + 1) * SIDE_CELL_SIZE,
+                    fill="cyan", outline="gray"
+                )
+
+    def second_block(self):
+        """次のブロックを表示"""
+        if not self.model.game_over:
+            for dx, dy in self.model.blocks[self.model.next_blocks[1]]:
+                x, y = (SUB_GRID_LENGTH / 4) + dx, (SUB_GRID_LENGTH / 4) + dy
+                self.second_canvas.create_rectangle(
+                    x * SIDE_CELL_SIZE, y * SIDE_CELL_SIZE, (x + 1) * SIDE_CELL_SIZE, (y + 1) * SIDE_CELL_SIZE,
+                    fill="cyan", outline="gray"
+                )
+
+    def third_block(self):
+        """次のブロックを表示"""
+        if not self.model.game_over:
+            for dx, dy in self.model.blocks[self.model.next_blocks[2]]:
+                x, y = (SUB_GRID_LENGTH / 4) + dx, (SUB_GRID_LENGTH / 4) + dy
+                self.third_canvas.create_rectangle(
                     x * SIDE_CELL_SIZE, y * SIDE_CELL_SIZE, (x + 1) * SIDE_CELL_SIZE, (y + 1) * SIDE_CELL_SIZE,
                     fill="cyan", outline="gray"
                 )
