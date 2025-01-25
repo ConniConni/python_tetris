@@ -28,6 +28,7 @@ class GameModel:
             self.next_blocks.append(block_type)
         self.holder_block = None
         self.score = 0
+        self.change_block = False
         self.game_over = False
 
     def spawn_block(self):
@@ -38,6 +39,7 @@ class GameModel:
         self.current_block = self.blocks[self.next_blocks.popleft()]
         self.update_next_blocks()
         self.current_position = (4, 0)
+        self.change_block = False
         # check_collision = Trueならば、game_overフラグを立てる
         if self.check_collision(self.current_block, self.current_position):
             self.game_over = True
@@ -63,10 +65,14 @@ class GameModel:
     def hold_block(self):
         """現在のブロックをホールド"""
         if self.holder_block is None:
+            self.change_block = True # 次のブロックが出現するまでブロックの入れ替えを禁止
             self.holder_block = self.current_block
-            self.spawn_block()
+            self.current_block = self.blocks[self.next_blocks.popleft()]
+            self.update_next_blocks()
+            self.current_position = (4, 0)
             print("hold_block")
         else:
+            self.change_block = True # 次のブロックが出現するまでブロックの入れ替えを禁止
             self.current_block, self.holder_block = self.holder_block, self.current_block
             self.current_position = (4, 0)
             print("change_block")
