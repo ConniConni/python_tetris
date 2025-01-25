@@ -102,7 +102,7 @@ class GameView:
                 )
 
     def second_block(self):
-        """次のブロックを表示"""
+        """次の次のブロックを表示"""
         if not self.model.game_over:
             for dx, dy in self.model.blocks[self.model.next_blocks[1]]:
                 x, y = (SUB_GRID_LENGTH / 4) + dx, (SUB_GRID_LENGTH / 4) + dy
@@ -112,7 +112,7 @@ class GameView:
                 )
 
     def third_block(self):
-        """次のブロックを表示"""
+        """次の次の次のブロックを表示"""
         if not self.model.game_over:
             for dx, dy in self.model.blocks[self.model.next_blocks[2]]:
                 x, y = (SUB_GRID_LENGTH / 4) + dx, (SUB_GRID_LENGTH / 4) + dy
