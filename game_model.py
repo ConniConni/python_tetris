@@ -58,7 +58,7 @@ class GameModel:
         rotated_block =[(-y, x) for x, y in self.current_block]
         if not self.check_collision(rotated_block, self.current_position):
             self.current_block = rotated_block
-            print("roate_block 90 degrees clockwise")
+            print("rotate_block 90 degrees clockwise")
 
     def check_collision(self, block , position):
         """ブロックの衝突判定"""
